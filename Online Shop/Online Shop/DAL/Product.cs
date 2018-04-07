@@ -22,7 +22,7 @@ namespace Online_Shop.DAL
         public Nullable<bool> IsFeatured { get; set; }
 
        
-        //public virtual ICollection<Cart> Cart { get; set; }
+        public virtual ICollection<Cart> Cart { get; set; }
         public virtual Category Category { get; set; }
     }
 }
