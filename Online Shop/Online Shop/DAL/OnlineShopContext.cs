@@ -16,5 +16,7 @@ namespace Online_Shop.DAL
         public DbSet<Roles> Role { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<ShippingDetails> ShippingDetail { get; set; }
+
+        public System.Data.Entity.DbSet<Online_Shop.Models.CategoryDetail> CategoryDetails { get; set; }
     }
 }

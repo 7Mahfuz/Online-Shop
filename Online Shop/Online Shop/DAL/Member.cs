@@ -21,5 +21,7 @@ namespace Online_Shop.DAL
         public Nullable<bool> IsDelete { get; set; }
         public Nullable<DateTime> CreatedOn { get; set; }
         public Nullable<DateTime> ModifiedOn { get; set; }
+
+        public  ICollection<Cart> Cart { get; set; }
     }
 }

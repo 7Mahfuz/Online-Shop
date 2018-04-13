@@ -175,6 +175,7 @@
     <Compile Include="Repository\GenericUnitOfWork.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Utility\EncryptDecrypt.cs" />
+    <Compile Include="Utility\UploadContent.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -545,9 +546,16 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Dashboard.cshtml" />
     <Content Include="Views\Admin\Categories.cshtml" />
+    <Content Include="Views\Admin\UpdateCategory.cshtml" />
+    <Content Include="Views\Admin\OrderDetail.cshtml" />
+    <Content Include="Views\Admin\Orders.cshtml" />
+    <Content Include="Views\Admin\ProductDetail.cshtml" />
+    <Content Include="Views\Admin\UpdateProduct.cshtml" />
+    <Content Include="Views\Admin\Products.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="images\" />
     <Folder Include="Scripts\tiny_mce\plugins\spellchecker\classes\" />
     <Folder Include="Scripts\tiny_mce\plugins\spellchecker\includes\" />
   </ItemGroup>
