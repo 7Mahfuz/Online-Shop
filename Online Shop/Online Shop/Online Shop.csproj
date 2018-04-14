@@ -166,6 +166,10 @@
     <Compile Include="Migrations\201804070230199_OnlineShop1.Designer.cs">
       <DependentUpon>201804070230199_OnlineShop1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804140613191_OnlineShop2.cs" />
+    <Compile Include="Migrations\201804140613191_OnlineShop2.Designer.cs">
+      <DependentUpon>201804140613191_OnlineShop2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\CategoryDetail.cs" />
@@ -576,6 +580,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201804070230199_OnlineShop1.resx">
       <DependentUpon>201804070230199_OnlineShop1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804140613191_OnlineShop2.resx">
+      <DependentUpon>201804140613191_OnlineShop2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

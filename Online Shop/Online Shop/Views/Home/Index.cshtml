@@ -1,31 +1,85 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Online Shopping : Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Online_Shop.DAL.Product> FeaturedProducts = (List<Online_Shop.DAL.Product>)ViewBag.FeaturedProducts;
 }
+<style>
+    .profPerson .ProfImg {
+        width: 240px;
+        height: 153px;
+    }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+    .assistImg .transition {
+        height: 107px;
+    }
+</style> <div class="homeSlider">
+    <div class="bannerSlider" style="background: url(../images/HomePageBanner1.png) no-repeat center center;">     </div>     <div class="searchOnline clearfix">
+        <div class="container">
+            <div class="olContent fl"><h2>Search Product/Category</h2></div>
+            <div class="olSearch fr">
+                @using (Html.BeginForm("Index", "Search", FormMethod.Post))
+                {
+                    <div>
+                        <input type="text" placeholder="Enter Keywords" onkeypress="return onlynumericOrCharacter();" name="searchKey" class="inputComn houseText">
+                    </div>
+                    <div class="searchIcon">
+                        <button type="button" class="searchBtn" onclick="$(this).parent().parent().submit();">
+                            <img src="/images/searchIcon.png" alt="img">
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div> <!--End Slider--> <!--Start Featured Professionals--> <div class="featuredProfessionals">
+    <div class="container">
+        <h1>Featured Products</h1>
+        <div class="professionSLider">
+            <div class="profSlider">
+                @foreach (var featured in FeaturedProducts)
+                {
+                    <div class="item">
+                        <div class="profPerson">
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+                            @if (File.Exists(Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["ProductImage"] + "Medium/" + featured.ProductId + "_" + featured.ProductImage)))
+                            {
+                                <img class="ProfImg" title="Click to view product detail" style="cursor:pointer;" onclick="window.location.href ='/search/productdetail?pId=@featured.ProductId'" src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage"] + "Medium/" + featured.ProductId+"_"+featured.ProductImage)" />
+                            }
+                            else
+                            {
+                                <img class="ProfImg" title="Click to view product detail" style="cursor:pointer;" onclick="window.location.href ='/search/productdetail?pId=@featured.ProductId'" src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage_Default_Medium"])" alt="" />
+                            }
+                            <div class="profMid clearfix">
+                                <h2 title="Click to view product detail" style="cursor:pointer;"><a href="/search/productdetail?pId=@featured.ProductId">  @featured.ProductName</a></h2>                                 <div class="leftprof fl">
+                                    <text>
+                                        Category <a title="Products of this category" style="cursor:pointer;" href="/search?searchkey=@featured.Category.CategoryName">@featured.Category.CategoryName</a>
+                                    </text>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profLast clearfix">
+                            <div class="leftprofLast fl"><h4>Price</h4></div>
+                            <div class="rightprofLast fr"><h5>@(featured.Price)</h5></div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="left-symbol"><img src="/Images/sliderRightarrow.png" alt="images"></div>             <div class="right-symbol"><img src="/Images/sliderLeftarrow.png" alt="images"></div>
+        </div>
     </div>
 </div>
+<!--End Featured Professionals-->
+@section Scripts{
+    <script>
+      window.onload = function () {
+      if ('@Request.QueryString["returnUrl"]' != '') {
+       $('#returnUrl').val('@Request.QueryString["returnUrl"]')
+       $('.loginpopup').trigger('click');
+    }
+
+    if ('@(Request.UrlReferrer !=null ?Request.UrlReferrer.AbsolutePath.ToLower():"")' == '/account/resetpassword') {
+                   $('.loginpopup').trigger('click');
+    }
+                          if('@TempData["VerificationLinlMsg"]'!='')             {
+     swal('@TempData["VerificationLinlMsg"]', '', 'success');
+     }         }     </script> }  

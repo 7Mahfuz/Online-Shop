@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Online_Shop.DAL;
+using Online_Shop.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +10,24 @@ namespace Online_Shop.Controllers
 {
     public class HomeController : Controller
     {
+        public GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
+
+        /// <summary>
+        /// Home Page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
+            ViewBag.FeaturedProducts = _unitOfWork.GetRepositoryInstance<Product>().GetListByParameter(i => i.IsFeatured == true && i.IsDelete == false && i.IsActive == true).ToList();
             return View();
         }
 
-        public ActionResult About()
+        #region Disposing UnitOfWork Context ...
+        protected override void Dispose(bool disposing)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            _unitOfWork.Dispose();
+            base.Dispose(disposing);
         }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        #endregion
     }
 }

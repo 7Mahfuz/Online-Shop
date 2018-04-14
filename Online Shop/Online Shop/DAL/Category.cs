@@ -13,5 +13,7 @@ namespace Online_Shop.DAL
         public string CategoryName { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDelete { get; set; }
+
+        public virtual ICollection<Product> Product { get; set; }
     }
 }

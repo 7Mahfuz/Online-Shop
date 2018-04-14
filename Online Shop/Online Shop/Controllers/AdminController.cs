@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static Online_Shop.Models.AccountViewModel;
 
 namespace Online_Shop.Controllers
 {
@@ -24,6 +25,35 @@ namespace Online_Shop.Controllers
 
 
 
+
+
+
+       
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult ChangePassword(ChangePasswordViewModel cpm)
+        {
+            int LoginMemberId = Convert.ToInt32(Session["MemberId"]);
+            var ExistingDetails = _unitOfWork.GetRepositoryInstance<Member>().GetFirstOrDefaultByParameter(i => i.MemberId == LoginMemberId && i.IsActive == true && i.IsDelete == false);
+            if (EncryptDecrypt.Encrypt(cpm.OldPassword, true) == ExistingDetails.Password)
+            {
+                ExistingDetails.Password = EncryptDecrypt.Encrypt(cpm.NewPassword, true);
+                _unitOfWork.SaveChanges();
+                ViewBag.PasswordChangeMsg = "Password changed successfully";
+            }
+            else
+                ModelState.AddModelError("OldPassword", "Current password is wrong");
+            return View();
+        }
+        
 
 
         public ActionResult Dashboard()
