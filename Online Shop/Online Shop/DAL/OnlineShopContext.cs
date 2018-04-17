@@ -11,7 +11,7 @@ namespace Online_Shop.DAL
         public DbSet<Member> Member { get; set; }
         public DbSet<Cart> Cart { get; set; }
         public DbSet<CartStatus> CartStatus { get; set; }
-        public DbSet<Category> Categorie { get; set; }
+        public DbSet<Category> Category { get; set; }
         public DbSet<MemberRole> MemberRole { get; set; }
         public DbSet<Roles> Role { get; set; }
         public DbSet<Product> Product { get; set; }

@@ -1,7 +1,9 @@
 ﻿@using Online_Shop.Utility
 @using Online_Shop.DAL
+@using System.Data.Entity;
 @{
-    List<Category> AllCategories = (List<Category>)ViewBag.CategoryAndSubCategory;
+    OnlineShopContext DBEntity = new OnlineShopContext();
+    List<Category> AllCategories = DBEntity.Category.ToList();//new List<Category>();//ViewBag.CategoryAndSubCategory;
 }
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -82,7 +84,7 @@
 
 
         <!--Login Popup/Modal-->
-        @*<div class="backBg" id="loginpopup">
+        <div class="backBg" id="loginpopup">
             @{
                 Html.RenderPartial("_Login", new Online_Shop.Models.LoginViewModel()
                 {
@@ -91,8 +93,8 @@
                     RememberMe = string.IsNullOrEmpty((Request.Cookies["RememberMe_UserEmailId"] != null ? Request.Cookies["RememberMe_UserEmailId"].Value : "")) ? false : true
                 }
            );
-                }
-        </div>*@
+            }
+        </div>
         <!--End Popup/Modal-->
     </div>
     <!--script-->

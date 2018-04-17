@@ -18,7 +18,12 @@ namespace Online_Shop.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
+            int  model= _unitOfWork.GetRepositoryInstance<Product>().GetListByParameter(i => i.IsFeatured == true && i.IsDelete == false && i.IsActive == true).ToList().Count();
             ViewBag.FeaturedProducts = _unitOfWork.GetRepositoryInstance<Product>().GetListByParameter(i => i.IsFeatured == true && i.IsDelete == false && i.IsActive == true).ToList();
+            if(model==0)
+            {
+                return RedirectToAction("Dashboard", "Admin");
+            }
             return View();
         }
 

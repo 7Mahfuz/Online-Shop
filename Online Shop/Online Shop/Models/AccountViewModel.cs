@@ -6,8 +6,7 @@ using System.Web;
 
 namespace Online_Shop.Models
 {
-    public class AccountViewModel
-    {
+   
         public class LoginViewModel
         {
             [Required(ErrorMessage = "Email address is required")]
@@ -90,5 +89,5 @@ namespace Online_Shop.Models
             [Compare("NewPassword", ErrorMessage = "Password doesn't match")]
             public string ConfirmPassword { get; set; }
         }
-    }
+    
 }
