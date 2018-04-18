@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Online_Shop.Models
 {
-    public class ShippingDetails
+    public class ShippingDetail
     {
         public string OrderId { get; set; }
         [Required]
