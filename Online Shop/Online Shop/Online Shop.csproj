@@ -596,6 +596,8 @@
     <Content Include="Views\Shopping\MyCart.cshtml" />
     <Content Include="Views\Shopping\CheckOut.cshtml" />
     <Content Include="Views\Shopping\_ShippingAddress.cshtml" />
+    <Content Include="Views\Admin\Register.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

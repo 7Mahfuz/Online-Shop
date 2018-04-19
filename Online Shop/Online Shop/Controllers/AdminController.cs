@@ -15,19 +15,153 @@ namespace Online_Shop.Controllers
     {
         private GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
         UploadContent uc = new UploadContent();
+        OnlineShopContext context = new OnlineShopContext();
 
-        // GET: Admin
         public ActionResult Index()
         {
-            return View();
+            int see = context.MemberRole.Count(x => x.RoleId == 1);
+            if(see==0)
+            {
+                return RedirectToAction("Register");
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl)
+        {
+            if (CheckAlreadyLoggedIn())
+                return Redirect(returnUrl != null ? returnUrl : "/admin/dashboard");
+            else
+            {
+                LoginViewModel loginModel = new LoginViewModel();
+                loginModel.UserEmailId = Request.Cookies["RememberMe_UserEmailId"] != null ? Request.Cookies["RememberMe_UserEmailId"].Value : "";
+                loginModel.Password = Request.Cookies["RememberMe_Password"] != null ? Request.Cookies["RememberMe_Password"].Value : "";
+                ViewBag.ReturnUrl = returnUrl;
+                return View(loginModel);
+            }
+        }
+
+        /// <summary>
+        /// Check if user is already logged in
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckAlreadyLoggedIn()
+        {
+            bool alreadyLoggedIn = false;
+            if (Session["MemberId"] != null && Request.Cookies["MemberRole"] != null && Request.Cookies["MemberRole"].Value == "Admin")
+            {
+                int memberId = Convert.ToInt32(Session["MemberId"]);
+                var user = _unitOfWork.GetRepositoryInstance<Member>().GetFirstOrDefaultByParameter(i => i.MemberId == memberId && i.IsActive == true && i.IsDelete == false);
+                if (user != null)
+                {
+                    Response.Cookies["MemberName"].Value = user.FirstName;
+                    var roles = _unitOfWork.GetRepositoryInstance<MemberRole>().GetFirstOrDefaultByParameter(i => i.MemberId == user.MemberId && i.RoleId == 3);
+                    if (roles != null)
+                        alreadyLoggedIn = true;
+                }
+            }
+            return alreadyLoggedIn;
+        }
+
+        /// <summary>
+        /// Login
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult Login(LoginViewModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                string EncryptedPassword = EncryptDecrypt.Encrypt(model.Password, true);
+                var user = _unitOfWork.GetRepositoryInstance<Member>().GetFirstOrDefaultByParameter(i => i.EmailId == model.UserEmailId && i.Password == EncryptedPassword && i.IsActive == true && i.IsDelete == false);
+                if (user != null)
+                {
+                    Session["MemberId"] = user.MemberId;
+                    Response.Cookies["MemberName"].Value = user.FirstName;
+                    var roles = _unitOfWork.GetRepositoryInstance<MemberRole>().GetFirstOrDefaultByParameter(i => i.MemberId == user.MemberId && i.RoleId == model.UserType);
+                    if (roles != null)
+                    {
+                        Response.Cookies["MemberRole"].Value = _unitOfWork.GetRepositoryInstance<Roles>().GetFirstOrDefaultByParameter(i => i.RoleId == model.UserType).RoleName;
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Password", "Password is wrong");
+                        return View(model);
+                    }
+                    if (Request["RememberMe1"] == "on")
+                    {
+                        Response.Cookies["RememberMe_UserEmailId"].Value = user.EmailId;
+                        Response.Cookies["RememberMe_Password"].Value = user.Password;
+                    }
+                    else
+                    {
+                        Response.Cookies["RememberMe_UserEmailId"].Expires = DateTime.Now.AddDays(-1);
+                        Response.Cookies["RememberMe_Password"].Expires = DateTime.Now.AddDays(-1);
+                    }
+                    return Redirect(returnUrl != null ? returnUrl : "/admin/dashboard");
+                }
+                else
+                {
+                    ModelState.AddModelError("Password", "Invalid email address or password");
+                }
+            }
+            return View(model);
         }
 
 
 
 
 
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            RegisterViewModel model = new RegisterViewModel();
+            model.UserType = 1;
+            return View(model);
+        }
 
-       
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult Register(RegisterViewModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {                 // Adding Member                 
+                Member mem = new Member();
+                mem.FirstName = model.FirstName;
+                mem.LastName = model.LastName;
+                mem.EmailId = model.UserEmailId;
+                mem.CreatedOn = DateTime.Now;
+                mem.ModifiedOn = DateTime.Now;
+                mem.Password = EncryptDecrypt.Encrypt(model.Password, true);
+                mem.IsActive = true;
+                mem.IsDelete = false;
+                _unitOfWork.GetRepositoryInstance<Member>().Add(mem);
+                // Adding Member Role                 
+                MemberRole mem_Role = new MemberRole();
+                mem_Role.MemberId = mem.MemberId;
+                mem_Role.RoleId = 1;
+                _unitOfWork.GetRepositoryInstance<MemberRole>().Add(mem_Role);
+
+                TempData["VerificationLinlMsg"] = "Registered successfully.";
+                //Session["MemberId"] = mem.MemberId;
+               // Response.Cookies["MemberName"].Value = mem.FirstName;
+               // Response.Cookies["MemberRole"].Value = "Admin";
+                return RedirectToAction("Dashboard");
+            }
+            return View( model);
+        }
+
         [HttpGet]
         public ActionResult ChangePassword()
         {
