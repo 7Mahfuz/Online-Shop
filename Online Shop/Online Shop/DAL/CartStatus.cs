@@ -11,6 +11,6 @@ namespace Online_Shop.DAL
         public string Cartstatus { get; set; }
 
         
-        public virtual ICollection<Cart> Tbl_Cart { get; set; }
+        public virtual ICollection<Cart> Cart { get; set; }
     }
 }

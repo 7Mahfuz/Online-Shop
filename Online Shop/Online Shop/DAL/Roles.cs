@@ -13,6 +13,6 @@ namespace Online_Shop.DAL
         public string RoleName { get; set; }
 
        
-        public virtual ICollection<MemberRole> MemberRole { get; set; }
+        public ICollection<MemberRole> MemberRole { get; set; }
     }
 }

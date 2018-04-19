@@ -8,7 +8,7 @@ namespace Online_Shop.Models
     public class MemberShoppingCartDetails_Result
     {
         public int CartId { get; set; }
-        public int ProductId { get; set; }
+        public Nullable<int> ProductId { get; set; }
         public string ProductName { get; set; }
         public string ProductImage { get; set; }
         public Nullable<decimal> Price { get; set; }

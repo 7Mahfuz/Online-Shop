@@ -13,6 +13,6 @@ namespace Online_Shop.DAL
         public Nullable<int> MemberId { get; set; }
         public Nullable<int> RoleId { get; set; }
 
-        public virtual Roles Roles { get; set; }
+        public  Roles Roles { get; set; }
     }
 }

@@ -148,9 +148,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Authorising\AuthorizeUserAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ShoppingController.cs" />
     <Compile Include="DAL\Cart.cs" />
     <Compile Include="DAL\CartStatus.cs" />
@@ -171,6 +173,10 @@
     <Compile Include="Migrations\201804140613191_OnlineShop2.cs" />
     <Compile Include="Migrations\201804140613191_OnlineShop2.Designer.cs">
       <DependentUpon>201804140613191_OnlineShop2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804190141070_OnlineShop3.cs" />
+    <Compile Include="Migrations\201804190141070_OnlineShop3.Designer.cs">
+      <DependentUpon>201804190141070_OnlineShop3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
@@ -215,9 +221,26 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="images\checkbox.png" />
+    <Content Include="images\close-icon.png" />
+    <Content Include="images\close-img.png" />
+    <Content Include="images\close-img11.png" />
+    <Content Include="images\close-img_Round.png" />
     <Content Include="images\closebtn.png" />
+    <Content Include="images\down14.png" />
+    <Content Include="images\edit-icon.png" />
     <Content Include="images\edit-icon2.png" />
     <Content Include="images\No Photo.png" />
+    <Content Include="images\rightarrow.png" />
+    <Content Include="images\rightarrow1.png" />
+    <Content Include="images\searchIcon.png" />
+    <Content Include="images\slider-mover.png" />
+    <Content Include="images\sliderLeftarrow.png" />
+    <Content Include="images\sliderRightarrow.png" />
+    <Content Include="images\sort_asc.png" />
+    <Content Include="images\sort_both.png" />
+    <Content Include="images\sort_desc.png" />
+    <Content Include="images\toggleIcon.png" />
     <Content Include="Scripts\Add_Update_Member.js" />
     <Content Include="Scripts\admin_function.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -568,6 +591,11 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Shopping\PaymentSuccess.cshtml" />
+    <Content Include="Views\Search\ProductDetail.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Shopping\MyCart.cshtml" />
+    <Content Include="Views\Shopping\CheckOut.cshtml" />
+    <Content Include="Views\Shopping\_ShippingAddress.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -594,6 +622,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804140613191_OnlineShop2.resx">
       <DependentUpon>201804140613191_OnlineShop2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804190141070_OnlineShop3.resx">
+      <DependentUpon>201804190141070_OnlineShop3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

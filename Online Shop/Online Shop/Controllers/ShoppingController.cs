@@ -14,6 +14,7 @@ namespace Online_Shop.Controllers
         #region Other Class references ...         
         // Instance on Unit of Work         
         public GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
+        public OnlineShopContext _context = new OnlineShopContext();
         private int _memberId;
         public int memberId
         {
@@ -45,12 +46,27 @@ namespace Online_Shop.Controllers
         /// MyCart
         /// </summary>
         /// <returns>List of cart items</returns>
-        //public ActionResult MyCart()
-        //{
-        //    List<USP_MemberShoppingCartDetails_Result> cd = _unitOfWork.GetRepositoryInstance<USP_MemberShoppingCartDetails_Result>().GetResultBySqlProcedure("USP_MemberShoppingCartDetails @memberId",
-        //        new SqlParameter("memberId", System.Data.SqlDbType.Int) { Value = memberId }).ToList();
-        //    return View(cd);
-        //}
+        public ActionResult MyCart()
+        {
+            //List<MemberShoppingCartDetails_Result> cd = _unitOfWork.GetRepositoryInstance<MemberShoppingCartDetails_Result>().GetResultBySqlProcedure("USP_MemberShoppingCartDetails @memberId",
+            //    new SqlParameter("memberId", System.Data.SqlDbType.Int) { Value = memberId }).ToList();
+            List<MemberShoppingCartDetails_Result> CD = new List<MemberShoppingCartDetails_Result>();
+            
+            var carts = _context.Cart.Where(x => x.MemberId == memberId).ToList();
+            foreach(var item in carts)
+            {
+                MemberShoppingCartDetails_Result temp = new MemberShoppingCartDetails_Result();
+                
+                temp.CartId = item.CartId;temp.ProductId = item.ProductId;
+                temp.ProductImage = _context.Product.FirstOrDefault(x => x.ProductId == item.ProductId).ProductImage;
+                temp.ProductName= _context.Product.FirstOrDefault(x => x.ProductId == item.ProductId).ProductName;
+                temp.Price= _context.Product.FirstOrDefault(x => x.ProductId == item.ProductId).Price;
+                temp.CategoryName = _context.Category.FirstOrDefault(x => x.CategoryId == (_context.Product.FirstOrDefault(y => y.ProductId == temp.ProductId).CategoryId)).CategoryName;
+                CD.Add(temp);
+            }
+
+            return View(CD);
+        }
 
         /// <summary>
         /// Remove Cart Item
@@ -71,14 +87,28 @@ namespace Online_Shop.Controllers
         /// CheckOut the Cart items
         /// </summary>
         /// <returns></returns>
-        //public ActionResult CheckOut()
-        //{
-        //    List<USP_MemberShoppingCartDetails_Result> cd = _unitOfWork.GetRepositoryInstance<USP_MemberShoppingCartDetails_Result>().GetResultBySqlProcedure("USP_MemberShoppingCartDetails @memberId",
-        //       new SqlParameter("memberId", System.Data.SqlDbType.Int) { Value = memberId }).ToList();
-        //    ViewBag.TotalPrice = cd.Sum(i => i.Price);
-        //    ViewBag.CartIds = string.Join(",", cd.Select(i => i.CartId).ToList());
-        //    return View(cd);
-        //}
+        public ActionResult CheckOut()
+        {
+            //List<MemberShoppingCartDetails_Result> cd = _unitOfWork.GetRepositoryInstance<MemberShoppingCartDetails_Result>().GetResultBySqlProcedure("USP_MemberShoppingCartDetails @memberId",
+            //   new SqlParameter("memberId", System.Data.SqlDbType.Int) { Value = memberId }).ToList();
+            List<MemberShoppingCartDetails_Result> CD = new List<MemberShoppingCartDetails_Result>();
+
+            var carts = _context.Cart.Where(x => x.MemberId == memberId).ToList();
+            foreach (var item in carts)
+            {
+                MemberShoppingCartDetails_Result temp = new MemberShoppingCartDetails_Result();
+
+                temp.CartId = item.CartId; temp.ProductId = item.ProductId;
+                temp.ProductImage = _context.Product.FirstOrDefault(x => x.ProductId == item.ProductId).ProductImage;
+                temp.ProductName = _context.Product.FirstOrDefault(x => x.ProductId == item.ProductId).ProductName;
+                temp.Price = _context.Product.FirstOrDefault(x => x.ProductId == item.ProductId).Price;
+                temp.CategoryName = _context.Category.FirstOrDefault(x => x.CategoryId == (_context.Product.FirstOrDefault(y => y.ProductId == temp.ProductId).CategoryId)).CategoryName;
+                CD.Add(temp);
+            }
+            ViewBag.TotalPrice = CD.Sum(i => i.Price);
+            ViewBag.CartIds = string.Join(",", CD.Select(i => i.CartId).ToList());
+            return View(CD);
+        }
 
         /// <summary>
         /// Payment Success
