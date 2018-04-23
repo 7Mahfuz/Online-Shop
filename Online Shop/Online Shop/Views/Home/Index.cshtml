@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     List<Online_Shop.DAL.Product> FeaturedProducts = (List<Online_Shop.DAL.Product>)ViewBag.FeaturedProducts;
 }
+<link href="~/Content/main.css" rel="stylesheet" />
 <style>
     .profPerson .ProfImg {
         width: 240px;
@@ -12,12 +13,56 @@
     .assistImg .transition {
         height: 107px;
     }
-</style> <div class="homeSlider">
-    <div class="bannerSlider" style="background: url(../images/HomePageBanner1.png) no-repeat center center;">     </div>     <div class="searchOnline clearfix">
-        <div class="container">
-            <div class="olContent fl"><h2>Search Product/Category</h2></div>
-            <div class="olSearch fr">
-                @using (Html.BeginForm("Index", "Search", FormMethod.Post))
+</style>
+
+<div class="homeSlider">
+    <div class="flexslider">
+        <ul class="slides">
+            <li>
+                <div class="bannerSlider" style="background: url(../images/HomePageBanner1.png) no-repeat center center;">
+
+                </div>
+            </li>
+            <li>
+                <div class="bannerSlider" style="background: url(../images/Home2.png) no-repeat center center;">
+                </div>
+            </li>
+            <li>
+                <div class="bannerSlider" style="background: url(../images/Home3.png) no-repeat center center;">
+                </div>
+            </li>
+            <li>
+                <div class="bannerSlider" style="background: url(../images/Home4.png) no-repeat center center;">
+                </div>
+            </li>
+</div>
+    </div>
+        @*<section class="homepage-slider" id="home-slider">
+            <div class="flexslider">
+                <ul class="slides">
+                    <li>
+
+                        <img src="~/images/banner-1.jpg" />
+                    </li>
+                    <li>
+
+                        <img src="~/images/banner-2.jpg" />
+                        <div class="intro">
+                            <h1>Mid season sale</h1>
+                            <p><span>Up to 50% Off</span></p>
+                            <p><span>On selected items online and in stores</span></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>*@
+
+
+        <div class="searchOnline clearfix">
+            <div class="container">
+                <div class="olContent fl"><h2>Search Product/Category</h2></div>
+                <div class="olSearch fr">
+                    @using (Html.BeginForm("Index", "Search", FormMethod.Post))
                 {
                     <div>
                         <input type="text" placeholder="Enter Keywords" onkeypress="return onlynumericOrCharacter();" name="searchKey" class="inputComn houseText">
@@ -27,11 +72,12 @@
                             <img src="/images/searchIcon.png" alt="img">
                         </button>
                     </div>
-                }
+            }
+                </div>
             </div>
         </div>
-    </div>
-</div> <!--End Slider--> <!--Start Featured Professionals--> <div class="featuredProfessionals">
+    </div> <!--End Slider--> <!--Start Featured Professionals-->
+ <div class="featuredProfessionals">
     <div class="container">
         <h1>Featured Products</h1>
         <div class="professionSLider">
@@ -69,8 +115,23 @@
     </div>
 </div>
 <!--End Featured Professionals-->
+ <script src="~/Scripts/jquery.flexslider-min.js"></script>
 @section Scripts{
     <script>
+
+        $(function () {
+            $(document).ready(function () {
+                $('.flexslider').flexslider({
+                    animation: "fade",
+                    slideshowSpeed: 800,
+                    animationSpeed: 800,
+                    controlNav: false,
+                    directionNav: true,
+                    controlsContainer: ".flex-container" // the container that holds the flexslider
+                });
+            });
+        });
+
       window.onload = function () {
       if ('@Request.QueryString["returnUrl"]' != '') {
        $('#returnUrl').val('@Request.QueryString["returnUrl"]')
@@ -82,4 +143,9 @@
     }
                           if('@TempData["VerificationLinlMsg"]'!='')             {
      swal('@TempData["VerificationLinlMsg"]', '', 'success');
-     }         }     </script> }  
+            }
+        }   
+
+        
+
+        </script> }  

@@ -178,6 +178,10 @@
     <Compile Include="Migrations\201804190141070_OnlineShop3.Designer.cs">
       <DependentUpon>201804190141070_OnlineShop3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804230640029_OnlineShop4.cs" />
+    <Compile Include="Migrations\201804230640029_OnlineShop4.Designer.cs">
+      <DependentUpon>201804230640029_OnlineShop4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\CategoryDetail.cs" />
@@ -194,6 +198,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\main.css" />
     <Content Include="CSS\adminfonts\roboto-bold-webfont.svg" />
     <Content Include="CSS\adminfonts\roboto-medium-webfont.svg" />
     <Content Include="CSS\adminfonts\roboto-regular-webfont.svg" />
@@ -230,6 +235,11 @@
     <Content Include="images\down14.png" />
     <Content Include="images\edit-icon.png" />
     <Content Include="images\edit-icon2.png" />
+    <Content Include="images\Home2.png" />
+    <Content Include="images\Home3.png" />
+    <Content Include="images\Home4.png" />
+    <Content Include="images\HomePageBanner1.png" />
+    <Content Include="images\Logo.jpg" />
     <Content Include="images\No Photo.png" />
     <Content Include="images\rightarrow.png" />
     <Content Include="images\rightarrow1.png" />
@@ -253,6 +263,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.flexslider-min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
@@ -627,6 +638,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804190141070_OnlineShop3.resx">
       <DependentUpon>201804190141070_OnlineShop3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804230640029_OnlineShop4.resx">
+      <DependentUpon>201804230640029_OnlineShop4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

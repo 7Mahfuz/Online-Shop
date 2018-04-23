@@ -6,7 +6,7 @@ namespace Online_Shop.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Online_Shop.DAL.OnlineShopContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<OnlineShopContext>
     {
         public Configuration()
         {
@@ -24,7 +24,11 @@ namespace Online_Shop.Migrations
             new Roles() { RoleName="Admin" },
             new Roles() { RoleName="User"}
                         );
-
+            context.CartStatus.AddOrUpdate(x => x.CartStatusId, 
+                new CartStatus() { Cartstatus = "Added to cart" },
+                new CartStatus() { Cartstatus = "Removed from cart" },
+                new CartStatus() { Cartstatus = "Purchased the item" }
+                );
 
         }
     }
