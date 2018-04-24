@@ -1,6 +1,8 @@
 namespace Online_Shop.Migrations
 {
     using Online_Shop.DAL;
+    using Online_Shop.Repository;
+    using Online_Shop.Utility;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -29,6 +31,26 @@ namespace Online_Shop.Migrations
                 new CartStatus() { Cartstatus = "Removed from cart" },
                 new CartStatus() { Cartstatus = "Purchased the item" }
                 );
+
+            GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
+            Member mem = new Member();
+            mem.FirstName ="Admin";
+            mem.LastName = "Admin";
+            mem.EmailId = "Admin@gmail.com";
+            mem.CreatedOn = DateTime.Now;
+            mem.ModifiedOn = DateTime.Now;
+            mem.Password = EncryptDecrypt.Encrypt("abc123", true);
+            mem.IsActive = true;
+            mem.IsDelete = false;
+            _unitOfWork.GetRepositoryInstance<Member>().Add(mem);
+
+            // Adding Member Role                 
+            MemberRole mem_Role = new MemberRole();
+            mem_Role.MemberId = mem.MemberId;
+            mem_Role.RoleId = 1;
+            _unitOfWork.GetRepositoryInstance<MemberRole>().Add(mem_Role);
+
+           
 
         }
     }

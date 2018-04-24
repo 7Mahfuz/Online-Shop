@@ -8,31 +8,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Online_Shop.Authorising;
+
 
 namespace Online_Shop.Controllers
 {
+    [AuthorizeUser(Roles="Admin")]
     public class AdminController : Controller
     {
         private GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
         UploadContent uc = new UploadContent();
         OnlineShopContext context = new OnlineShopContext();
 
-        public ActionResult Index()
-        {
-            int see = context.MemberRole.Count(x => x.RoleId == 1);
-            if(see==0)
-            {
-                return RedirectToAction("Register");
-            }
-            else
-            {
-                return RedirectToAction("Login");
-            }
-        }
 
 
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Index(string returnUrl)
         {
             if (CheckAlreadyLoggedIn())
                 return Redirect(returnUrl != null ? returnUrl : "/admin/dashboard");
@@ -78,7 +69,7 @@ namespace Online_Shop.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Login(LoginViewModel model, string returnUrl)
+        public ActionResult Index(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {

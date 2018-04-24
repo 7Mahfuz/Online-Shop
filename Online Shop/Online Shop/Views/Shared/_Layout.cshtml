@@ -24,6 +24,8 @@
         <meta name="description" content="@ViewBag.MetaDescription">
     }
     <!--css-->
+
+    <link href="~/Content/main.css" rel="stylesheet" />
     <link rel="stylesheet" href="/CSS/stylesheet.css" media="all">
     <link rel="stylesheet" href="/CSS/owl.carousel.css">
     <link href="~/CSS/CustomStyleSheet.css" rel="stylesheet" />
@@ -39,69 +41,74 @@
     <div class="mainCon">
         <!--Start Header-->
         <header class="clearfix">
-            <section class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="browseCategories">
-                        <button type="button" class="categoriesBtn"><img src="/Images/toggleIcon.png" alt="img" /><span>Browse Categories</span></button>
-                    </div>
-                    <div class="logoBar"><a href="/home/index"><img src="/Images/Logo.jpg" alt="logo" /></a></div>
-                    <div class="menuBar">
-                        <div class="menuMobile">
-                            <ul>
-                                @if (Session["MemberId"] != null)
+            <div class="browseCategories">
+                <button type="button" class="categoriesBtn"><img src="/Images/toggleIcon.png" alt="img" /><span>Browse Categories</span></button>
+            </div>
+            <div class="logoBar"><a href="/home/index"><img src="/Images/Logo.jpg" alt="logo" /></a></div>
+            <div class="menuBar">
+
+
+
+
+                <div class="menuMobile">
+                    <ul>
+
+                        @if (Session["MemberId"] != null)
                         {
                             <li>Hello @(Request.Cookies["MemberName"] != null && !string.IsNullOrEmpty(Request.Cookies["MemberName"].Value) ? Request.Cookies["MemberName"].Value : "User")</li>
                             <li><a href="/shopping/mycart">Cart Items</a></li>
                             <li><a href="/account/logout">Logout</a></li>
-                }
-                else
-                {
-                    <li><a href="javascript:void(0)" class="loginpopup">Login</a></li>
-                    <li><a href="/account/register">Sign Up</a></li>
-        }
-                            </ul>
-                        </div>
-                    </div>
-                    </div>
-                    </section>
-            
+                        }
+                        else
+                        {
+                            <li><a href="javascript:void(0)" class="loginpopup">Login</a></li>
+                            <li><a href="/account/register">Sign Up</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
         </header>
-        <div class="categories transition">
-            <ul class="categoriesList">
-                <!--<div class="closeBtn">X Close</div>-->
-                @foreach (var cat in AllCategories)
-                {
-                    <li class="@(AllCategories.Where(i => i.CategoryId == cat.CategoryId).Count() > 0 ? "subcat" : "")">
-                        <a href="/Search/index?searchKey=@cat.CategoryName">@cat.CategoryName</a>
-                        <ul class="subCategories" style="display:@(AllCategories.Where(i => i.CategoryId == cat.CategoryId).Count() > 0  ? "" : "none")">
-                            <h1>All @cat.CategoryName</h1>
-                            @foreach (var p in cat.Product.ToList())
-                            {
-                                <li><a href="/Search/index?searchKey=@p.ProductName">@p.ProductName</a></li>
-                            }
-                        </ul>
-                    </li>
-                }
-            </ul>
-        </div>
-        <!--End Header-->
-        @RenderBody()
-
-
-        <!--Login Popup/Modal-->
-        <div class="backBg" id="loginpopup">
-            @{
-                Html.RenderPartial("_Login", new Online_Shop.Models.LoginViewModel()
-                {
-                    UserEmailId = (Request.Cookies["RememberMe_UserEmailId"] != null ? Request.Cookies["RememberMe_UserEmailId"].Value : ""),
-                    Password = (Request.Cookies["RememberMe_Password"] != null ? Request.Cookies["RememberMe_Password"].Value : ""),
-                    RememberMe = string.IsNullOrEmpty((Request.Cookies["RememberMe_UserEmailId"] != null ? Request.Cookies["RememberMe_UserEmailId"].Value : "")) ? false : true
-                }
-           );
-            }
-        </div>
-        <!--End Popup/Modal-->
     </div>
+
+    <div class="categories transition">
+        <ul class="categoriesList">
+            <!--<div class="closeBtn">X Close</div>-->
+            @foreach (var cat in AllCategories)
+            {
+                <li class="@(AllCategories.Where(i => i.CategoryId == cat.CategoryId).Count() > 0 ? "subcat" : "")">
+                    <a href="/Search/index?searchKey=@cat.CategoryName">@cat.CategoryName</a>
+                    <ul class="subCategories" style="display:@(AllCategories.Where(i => i.CategoryId == cat.CategoryId).Count() > 0  ? "" : "none")">
+                        <h1>All @cat.CategoryName</h1>
+                        @foreach (var p in cat.Product.ToList())
+                        {
+                            <li><a href="/Search/index?searchKey=@p.ProductName">@p.ProductName</a></li>
+                        }
+                    </ul>
+                </li>
+            }
+        </ul>
+    </div>
+    <!--End Header-->
+    @RenderBody()
+
+    <!--Login Popup/Modal-->
+    <div class="backBg" id="loginpopup">
+        @{
+            Html.RenderPartial("_Login", new Online_Shop.Models.LoginViewModel()
+            {
+                UserEmailId = (Request.Cookies["RememberMe_UserEmailId"] != null ? Request.Cookies["RememberMe_UserEmailId"].Value : ""),
+                Password = (Request.Cookies["RememberMe_Password"] != null ? Request.Cookies["RememberMe_Password"].Value : ""),
+                RememberMe = string.IsNullOrEmpty((Request.Cookies["RememberMe_UserEmailId"] != null ? Request.Cookies["RememberMe_UserEmailId"].Value : "")) ? false : true
+            }
+       );
+        }
+    </div>
+    <!--End Popup/Modal-->
+
+    <hr />
+
+
+
     <!--script-->
 
     <script src="/Scripts/owl.carousel.min.js"></script>
@@ -115,4 +122,87 @@
     <script src="~/Scripts/datepicker.js"></script>
     @RenderSection("Scripts", false)
 </body>
+
+<!--Footer-->
+<link href="~/Content/bootstrap.min - Copy.css" rel="stylesheet" />
+<link href="~/Content/main_styles.css" rel="stylesheet" />
+<footer>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 footer_col">
+                    <div class="footer_column footer_contact">
+                        <div class="logo_container">
+                            <div class="logo"><a href="#">OneTech</a></div>
+                        </div>
+                        <div class="footer_title">Got Question? Call Us 24/7</div>
+                        <div class="footer_phone">+38 068 005 3570</div>
+                        <div class="footer_contact_text">
+                            <p>17 Princess Road, London</p>
+                            <p>Grester London NW18JR, UK</p>
+                        </div>
+                        <div class="footer_social">
+                            <ul>
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google"></i></a></li>
+                                <li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 offset-lg-2">
+                    <div class="footer_column">
+                        <div class="footer_title">Find it Fast</div>
+                        <ul class="footer_list">
+                            <li><a href="#">Computers & Laptops</a></li>
+                            <li><a href="#">Cameras & Photos</a></li>
+                            <li><a href="#">Hardware</a></li>
+                            <li><a href="#">Smartphones & Tablets</a></li>
+                            <li><a href="#">TV & Audio</a></li>
+                        </ul>
+                        <div class="footer_subtitle">Gadgets</div>
+                        <ul class="footer_list">
+                            <li><a href="#">Car Electronics</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="footer_column">
+                        <ul class="footer_list footer_list_2">
+                            <li><a href="#">Video Games & Consoles</a></li>
+                            <li><a href="#">Accessories</a></li>
+                            <li><a href="#">Cameras & Photos</a></li>
+                            <li><a href="#">Hardware</a></li>
+                            <li><a href="#">Computers & Laptops</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="footer_column">
+                        <div class="footer_title">Customer Care</div>
+                        <ul class="footer_list">
+                            <li><a href="#">My Account</a></li>
+                            <li><a href="#">Order Tracking</a></li>
+                            <li><a href="#">Wish List</a></li>
+                            <li><a href="#">Customer Services</a></li>
+                            <li><a href="#">Returns / Exchange</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Product Support</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </footer>
+</footer>      <!--Footer End-->
+
+
 </html>

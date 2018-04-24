@@ -1,4 +1,5 @@
-﻿using Online_Shop.DAL;
+﻿using Online_Shop.Authorising;
+using Online_Shop.DAL;
 using Online_Shop.Models;
 using Online_Shop.Repository;
 using System;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Online_Shop.Controllers
 {
+    [AuthorizeUser]
     public class ShoppingController : Controller
     {
         #region Other Class references ...         

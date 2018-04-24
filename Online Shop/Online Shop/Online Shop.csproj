@@ -148,6 +148,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Authorising\ActionFilter.cs" />
     <Compile Include="Authorising\AuthorizeUserAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -197,8 +198,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min - Copy.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\main.css" />
+    <Content Include="Content\main_styles.css" />
     <Content Include="CSS\adminfonts\roboto-bold-webfont.svg" />
     <Content Include="CSS\adminfonts\roboto-medium-webfont.svg" />
     <Content Include="CSS\adminfonts\roboto-regular-webfont.svg" />
@@ -588,7 +591,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\AdminMenu.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Dashboard.cshtml" />
     <Content Include="Views\Admin\Categories.cshtml" />
     <Content Include="Views\Admin\UpdateCategory.cshtml" />
@@ -608,7 +610,7 @@
     <Content Include="Views\Shopping\CheckOut.cshtml" />
     <Content Include="Views\Shopping\_ShippingAddress.cshtml" />
     <Content Include="Views\Admin\Register.cshtml" />
-    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
