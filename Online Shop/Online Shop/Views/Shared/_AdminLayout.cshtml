@@ -32,8 +32,11 @@
     <div class="main-cont">
         <!---->
         <div class="headertop">
-            <div class="logo"><a href="/">Logo</a></div>
+            @*<div class="float-left">
+                <div ><a href="/home/index"><img src="~/images/Logo.jpg" alt="logo" /></div>
+            </div>*@
             <div class="header-right">
+            @*<div class="float-right">*@
                 <span>
                     Welcome @(Request.Cookies["MemberName"] != null ? Request.Cookies["MemberName"].Value : "")  |  <a href="/account/logout"> Log Out</a>
                 </span>

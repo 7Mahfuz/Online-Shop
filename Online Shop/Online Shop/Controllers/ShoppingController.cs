@@ -54,7 +54,7 @@ namespace Online_Shop.Controllers
             //    new SqlParameter("memberId", System.Data.SqlDbType.Int) { Value = memberId }).ToList();
             List<MemberShoppingCartDetails_Result> CD = new List<MemberShoppingCartDetails_Result>();
             
-            var carts = _context.Cart.Where(x => x.MemberId == memberId).ToList();
+            var carts = _context.Cart.Where(x => x.MemberId == memberId && x.CartStatusId==1).ToList();
             foreach(var item in carts)
             {
                 MemberShoppingCartDetails_Result temp = new MemberShoppingCartDetails_Result();
@@ -124,11 +124,11 @@ namespace Online_Shop.Controllers
             sd.AddressLine = shippingDetails.Address;
             sd.City = shippingDetails.City;
             sd.State = shippingDetails.State;
-            sd.Country = shippingDetails.Country;
+            sd.Country = "Bangladesh";
             sd.ZipCode = shippingDetails.ZipCode;
             sd.OrderId = Guid.NewGuid().ToString();
             sd.AmountPaid = shippingDetails.TotalPrice;
-            sd.PaymentType = shippingDetails.PaymentType;
+            
             _unitOfWork.GetRepositoryInstance<ShippingDetails>().Add(sd);
             _unitOfWork.GetRepositoryInstance<Cart>().UpdateByWhereClause(i => i.MemberId == memberId && i.CartStatusId == 1, (j => j.CartStatusId = 3));
             _unitOfWork.SaveChanges();

@@ -8,8 +8,8 @@
             <input name="TotalPrice" value="@ViewBag.TotalPrice" style="position: absolute;  visibility: hidden;" />
             <input type="hidden" value="@ViewBag.CartIds" name="CartIds" />
             <div class="formRow clearfix" style="margin:20px 0;">
-                <b>Select Payment Type*</b>
-                <div style="margin-top: 8px;">
+                <h3>Our Payment is full Cash on delivery service</h3>
+                @*<div style="margin-top: 8px;">
                     <label for="radio-2" class="css-label">
                         @Html.RadioButton("PaymentType", "Pay Using Debit/Credit Card", new { @class = "css-checkbox" })
                         Pay Using Debit/Credit Card
@@ -22,8 +22,8 @@
                         @Html.RadioButton("PaymentType", "Cash On Delivery", new { @class = "css-checkbox" })
                         Cash On Delivery
                     </label>
-                    @Html.ValidationMessageFor(m => m.PaymentType)
-                </div>
+                   
+                </div>*@
             </div>
 
             <b>Shipping Address</b>
@@ -44,11 +44,11 @@
             </div>
 
             <div class="formRow clearfix">
-                <div class="half fl">
+                @*<div class="half fl">
                     <label>Country*  @Html.ValidationMessageFor(m => m.Country)</label>
                     @Html.TextBoxFor(m => m.Country, new { @class = "inputComn", @placeholder = "Country" })
-                </div>
-                <div class="half fr">
+                </div>*@
+                <div class="half fl">
                     <label>Zip Code*  @Html.ValidationMessageFor(m => m.ZipCode)</label>
                     @Html.TextBoxFor(m => m.ZipCode, new { @class = "inputComn", @placeholder = "Zip Code" })
                 </div>

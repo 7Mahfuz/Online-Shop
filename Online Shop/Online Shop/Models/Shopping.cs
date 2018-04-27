@@ -15,12 +15,12 @@ namespace Online_Shop.Models
         public string City { get; set; }
         [Required]
         public string State { get; set; }
-        [Required]
+         
         public string Country { get; set; }
         [Required]
         public string ZipCode { get; set; }
         public decimal TotalPrice { get; set; }
-        [Required]
-        public string PaymentType { get; set; }
+        
+       
     }
 }

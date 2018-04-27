@@ -32,7 +32,7 @@ namespace Online_Shop.Controllers
                 if (user != null && user.IsActive == true)
                 {
                     Session["MemberId"] = user.MemberId;
-                    Response.Cookies["MemberName"].Value = user.FirstName;
+                    Response.Cookies["MemberName"].Value = user.FirstName +" "+user.LastName;
                     var roles = _unitOfWork.GetRepositoryInstance<MemberRole>().GetFirstOrDefaultByParameter(i => i.MemberId == user.MemberId);
                     if (roles != null && roles.RoleId != 1)
                     {
@@ -95,7 +95,7 @@ namespace Online_Shop.Controllers
 
                 TempData["VerificationLinlMsg"] = "You are registered successfully.";
                 Session["MemberId"] = mem.MemberId;
-                Response.Cookies["MemberName"].Value = mem.FirstName;
+                Response.Cookies["MemberName"].Value = mem.FirstName + " "+mem.LastName;
                 Response.Cookies["MemberRole"].Value = "User";
                 return RedirectToAction("Index", "Home");
             }

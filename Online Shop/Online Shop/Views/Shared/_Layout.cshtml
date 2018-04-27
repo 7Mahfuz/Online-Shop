@@ -24,7 +24,8 @@
         <meta name="description" content="@ViewBag.MetaDescription">
     }
     <!--css-->
-
+    <link href="~/Content/bootstrap.min - Copy.css" rel="stylesheet" />
+    <link href="~/Content/main_styles.css" rel="stylesheet" />
     <link href="~/Content/main.css" rel="stylesheet" />
     <link rel="stylesheet" href="/CSS/stylesheet.css" media="all">
     <link rel="stylesheet" href="/CSS/owl.carousel.css">
@@ -35,7 +36,48 @@
     <!--css-->
     <title> @ViewBag.MetaTitle </title>
 </head>
+<style>
+    .dropbtn {
+        background-color: white;
+        color: #4CAF50;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+    }
 
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #ddd
+            }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: white;
+    }
+</style>
 <body class="@((Request.Url.AbsolutePath.ToLower() != "/" && Request.Url.AbsolutePath.ToLower() != "/home" && Request.Url.AbsolutePath.ToLower() != "/home/index") ? "bgColor" : "")">
     <!--Start main Container-->
     <div class="mainCon">
@@ -44,18 +86,33 @@
             <div class="browseCategories">
                 <button type="button" class="categoriesBtn"><img src="/Images/toggleIcon.png" alt="img" /><span>Browse Categories</span></button>
             </div>
-            <div class="logoBar"><a href="/home/index"><img src="/Images/Logo.jpg" alt="logo" /></a></div>
+
+            <div class="logoBar"><a href="/home/index"><img src="~/images/Logo.jpg" alt="logo" /></a></div>
             <div class="menuBar">
 
 
 
 
                 <div class="menuMobile">
+                    @if (Session["MemberId"] != null)
+                    {
+                        <div class="dropdown">
+                            <button class="dropbtn">  @(Request.Cookies["MemberName"] != null && !string.IsNullOrEmpty(Request.Cookies["MemberName"].Value) ? Request.Cookies["MemberName"].Value : "User")</button>
+                            <div class="dropdown-content">
+                                <a href="javascript:void(0)" class="loginpopup">Change Name</a>
+                                <a href="javascript:void(0)">Change Email</a>
+                                <a href="javascript:void(0)">Change Password</a>
+                            </div>
+                        </div>
+                    }
                     <ul>
 
                         @if (Session["MemberId"] != null)
                         {
-                            <li>Hello @(Request.Cookies["MemberName"] != null && !string.IsNullOrEmpty(Request.Cookies["MemberName"].Value) ? Request.Cookies["MemberName"].Value : "User")</li>
+                            @*<div class="dropDown">
+                                    Hello @(Request.Cookies["MemberName"] != null && !string.IsNullOrEmpty(Request.Cookies["MemberName"].Value) ? Request.Cookies["MemberName"].Value : "User")
+                                </div>*@
+
                             <li><a href="/shopping/mycart">Cart Items</a></li>
                             <li><a href="/account/logout">Logout</a></li>
                         }
@@ -121,88 +178,95 @@
     <script src="~/Scripts/jquery-ui.js"></script>
     <script src="~/Scripts/datepicker.js"></script>
     @RenderSection("Scripts", false)
-</body>
 
-<!--Footer-->
-<link href="~/Content/bootstrap.min - Copy.css" rel="stylesheet" />
-<link href="~/Content/main_styles.css" rel="stylesheet" />
-<footer>
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
 
-                <div class="col-lg-3 footer_col">
-                    <div class="footer_column footer_contact">
-                        <div class="logo_container">
-                            <div class="logo"><a href="#">OneTech</a></div>
+    <!--Footer-->
+
+
+    <footer>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 footer_col">
+                        <div class="footer_column footer_contact">
+                            <div class="logo_container">
+                                <div class="logo"><a href="#">টীম এর নাম</a></div>
+                            </div>
+                            <div class="footer_title">Got Question? Call Us 24/7</div>
+                            <div class="footer_phone">ফোন নাম্বার</div>
+                            <div class="footer_contact_text">
+                                <p>ঠিকানা</p>
+                                <p>ঠিকানা</p>
+                            </div>
+                            <div class="footer_social">
+                                <ul>
+
+                                    <a target="_blank" title="find us on Facebook" href="http://www.facebook.com/PLACEHOLDER"><img alt="find us on facebook" src="//login.create.net/images/icons/user/facebook-c_130x50.png" border=0></a>
+                                    @*<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-google"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>*@
+                                </ul>
+                            </div>
                         </div>
-                        <div class="footer_title">Got Question? Call Us 24/7</div>
-                        <div class="footer_phone">+38 068 005 3570</div>
-                        <div class="footer_contact_text">
-                            <p>17 Princess Road, London</p>
-                            <p>Grester London NW18JR, UK</p>
-                        </div>
-                        <div class="footer_social">
-                            <ul>
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                <li><a href="#"><i class="fab fa-google"></i></a></li>
-                                <li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
+                    </div>
+
+                    <div class="col-lg-2 offset-lg-2">
+                        <div class="footer_column">
+                            <div class="footer_title">Find it </div>
+                            <ul class="footer_list">
+                                <li><a href="#">Computers & Laptops</a></li>
+                                <li><a href="#">Cameras & Photos</a></li>
+                                <li><a href="#">Hardware</a></li>
+                                <li><a href="#">Smartphones & Tablets</a></li>
+                                <li><a href="#">TV & Audio</a></li>
+                            </ul>
+                            <div class="footer_subtitle">Gadgets</div>
+                            <ul class="footer_list">
+                                <li><a href="#">Car Electronics</a></li>
                             </ul>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-2 offset-lg-2">
-                    <div class="footer_column">
-                        <div class="footer_title">Find it Fast</div>
-                        <ul class="footer_list">
-                            <li><a href="#">Computers & Laptops</a></li>
-                            <li><a href="#">Cameras & Photos</a></li>
-                            <li><a href="#">Hardware</a></li>
-                            <li><a href="#">Smartphones & Tablets</a></li>
-                            <li><a href="#">TV & Audio</a></li>
-                        </ul>
-                        <div class="footer_subtitle">Gadgets</div>
-                        <ul class="footer_list">
-                            <li><a href="#">Car Electronics</a></li>
-                        </ul>
+                    <div class="col-lg-2">
+                        <div class="footer_column">
+                            <div class="footer_title">Find it Fast</div>
+                            <ul class="footer_list footer_list_2">
+                                <li><a href="#">Video Games & Consoles</a></li>
+                                <li><a href="#">Accessories</a></li>
+                                <li><a href="#">Cameras & Photos</a></li>
+                                <li><a href="#">Hardware</a></li>
+                                <li><a href="#">Computers & Laptops</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-lg-2">
-                    <div class="footer_column">
-                        <ul class="footer_list footer_list_2">
-                            <li><a href="#">Video Games & Consoles</a></li>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Cameras & Photos</a></li>
-                            <li><a href="#">Hardware</a></li>
-                            <li><a href="#">Computers & Laptops</a></li>
-                        </ul>
+                    <div class="col-lg-2">
+                        <div class="footer_column">
+                            <div class="footer_title">Customer Care</div>
+                            <ul class="footer_list">
+                                <li><a href="#">My Account</a></li>
+                                <li><a href="#">Order Tracking</a></li>
+                                <li><a href="#">Wish List</a></li>
+                                <li><a href="#">Customer Services</a></li>
+                                <li><a href="#">Returns / Exchange</a></li>
+                                <li><a href="#">FAQs</a></li>
+                                <li><a href="#">Product Support</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-lg-2">
-                    <div class="footer_column">
-                        <div class="footer_title">Customer Care</div>
-                        <ul class="footer_list">
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Order Tracking</a></li>
-                            <li><a href="#">Wish List</a></li>
-                            <li><a href="#">Customer Services</a></li>
-                            <li><a href="#">Returns / Exchange</a></li>
-                            <li><a href="#">FAQs</a></li>
-                            <li><a href="#">Product Support</a></li>
-                        </ul>
-                    </div>
                 </div>
-
             </div>
-        </div>
 
-    </footer>
-</footer>      <!--Footer End-->
+        </footer>
+    </footer>      <!--Footer End-->
+
+
+</body>
+
 
 
 </html>

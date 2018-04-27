@@ -78,9 +78,13 @@ namespace Online_Shop.Models
             public string EmailId { get; set; }
         }
 
-        public class ResetPasswordViewModel
-        {
-            public string EmailId { get; set; }
+    public class ResetPasswordViewModel
+    {
+        public string EmailId { get; set; }
+
+        //[Required]
+        //[DataType(DataType.Password)]
+        //public string OldPassword{get;set;}
 
             [Required(ErrorMessage = "Password is required")]
             [StringLength(100, ErrorMessage = "Minimum {2} and Maximum {1} characters are allowed", MinimumLength = 5)]

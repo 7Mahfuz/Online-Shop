@@ -183,6 +183,10 @@
     <Compile Include="Migrations\201804230640029_OnlineShop4.Designer.cs">
       <DependentUpon>201804230640029_OnlineShop4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804251648071_OnlineShop5.cs" />
+    <Compile Include="Migrations\201804251648071_OnlineShop5.Designer.cs">
+      <DependentUpon>201804251648071_OnlineShop5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\CategoryDetail.cs" />
@@ -200,6 +204,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min - Copy.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fontawesome-all.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\main_styles.css" />
     <Content Include="CSS\adminfonts\roboto-bold-webfont.svg" />
@@ -239,8 +244,9 @@
     <Content Include="images\edit-icon.png" />
     <Content Include="images\edit-icon2.png" />
     <Content Include="images\Home2.png" />
-    <Content Include="images\Home3.png" />
+    <Content Include="images\Home5.png" />
     <Content Include="images\Home4.png" />
+    <Content Include="images\Home6.png" />
     <Content Include="images\HomePageBanner1.png" />
     <Content Include="images\Logo.jpg" />
     <Content Include="images\No Photo.png" />
@@ -643,6 +649,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804230640029_OnlineShop4.resx">
       <DependentUpon>201804230640029_OnlineShop4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804251648071_OnlineShop5.resx">
+      <DependentUpon>201804251648071_OnlineShop5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

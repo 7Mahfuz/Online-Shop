@@ -28,13 +28,13 @@
         </div>
         <div class="clearfix"></div>
         <div class="dashfrm">
-            <label class="lblTxt">First Name*</label>
+            <label class="label-info">First Name*</label>
             @Html.ValidationMessageFor(m => m.FirstName)
             @Html.TextBoxFor(m => m.FirstName, new { @class = "inputComn", @placeholder = "First Name" })
         </div>
 
         <div class="dashfrm-M">
-            <label class="lblTxt">Last Name*</label>
+            <label >Last Name*</label>
             @Html.ValidationMessageFor(m => m.LastName)
             @Html.TextBoxFor(m => m.LastName, new { @class = "inputComn", @placeholder = "Last Name" })
         </div>
